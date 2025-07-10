@@ -1,0 +1,11 @@
+[attacker]
+attacker ansible_host=10.10.30.10 ansible_user=debian
+
+[soc_server]
+soc-server ansible_host=10.10.20.10 ansible_user=ubuntu
+
+[user_pc]
+user-pc ansible_host=10.10.10.50 ansible_user=Administrator ansible_connection=winrm
+
+[internal_server]
+internal-server ansible_host=10.10.10.60 ansible_user=ubuntu

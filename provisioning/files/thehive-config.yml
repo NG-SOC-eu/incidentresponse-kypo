@@ -1,0 +1,7 @@
+cortex:
+  url: "http://localhost:9001"
+  key: "cortex-api-key"
+
+misp:
+  url: "http://localhost:8080"
+  key: "misp-api-key"

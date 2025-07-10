@@ -1,0 +1,49 @@
+---
+- name: Configure SOC Server
+  hosts: soc_server
+  become: yes
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Add Elastic Stack GPG key
+      apt_key:
+        url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+        state: present
+
+    - name: Add Elastic Stack repository
+      apt_repository:
+        repo: "deb https://artifacts.elastic.co/packages/7.x/apt stable main"
+        state: present
+
+    - name: Add TheHive Project GPG key
+      apt_key:
+        url: https://deb.thehive-project.org/thehive-project.gpg.key
+        state: present
+
+    - name: Add TheHive and Cortex repository
+      apt_repository:
+        repo: "deb https://deb.thehive-project.org release main"
+        state: present
+
+    - name: Update apt cache after adding repos
+      apt:
+        update_cache: yes
+
+    - name: Install SIEM stack
+      apt:
+        name: [elasticsearch, kibana, logstash]
+        state: present
+    - name: Install TheHive and Cortex
+      apt:
+        name: [openjdk-11-jdk, cassandra, thehive, cortex]
+        state: present
+    - name: Install and configure MISP
+      shell: |
+        git clone https://github.com/MISP/MISP.git /opt/MISP
+        cd /opt/MISP && ./INSTALL.sh
+    - name: Configure integrations
+      copy:
+        src: files/thehive-config.yml
+        dest: /etc/thehive/application.conf

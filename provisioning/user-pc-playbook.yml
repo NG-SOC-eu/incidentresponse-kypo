@@ -1,0 +1,10 @@
+---
+- name: Prepare Windows workstation
+  hosts: user_pc
+  tasks:
+    - name: Enable PowerShell Remoting
+      win_shell: Enable-PSRemoting -Force
+    - name: Install Sysinternals tools
+      win_chocolatey:
+        name: sysinternals
+        state: present

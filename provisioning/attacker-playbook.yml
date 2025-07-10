@@ -1,0 +1,17 @@
+---
+- name: Configure Attacker VM
+  hosts: attacker
+  become: yes
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+    - name: Install attack tools
+      apt:
+        name: [metasploit-framework, nmap, searchsploit, netcat]
+        state: present
+    - name: Setup initial attack script
+      copy:
+        src: files/attack-script.sh
+        dest: /opt/attack-script.sh
+        mode: '0755'
