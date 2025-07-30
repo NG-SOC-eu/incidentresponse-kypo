@@ -33,7 +33,7 @@ ansible-playbook -i inventory.sample provisioning/service-checks.yml
 
 ## Additional Materials
 
-Screenshots and a lab document (`LM8-Operation IncidentResponse v2.docx`) are provided for reference.
+Screenshots and a lab document (`LM8-Operation IncidentResponse`) are provided for reference.
 
 ## Role Guides
 
